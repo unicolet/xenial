@@ -1,22 +1,28 @@
 #!/usr/bin/env bash
 
-# @ VirtualBox @
+set -x
 
+# @ VirtualBox and base packages @
 export DEBIAN_FRONTEND=noninteractive
-sudo apt update
-sudo apt-get -y upgrade
-sudo apt install -y ansible linux-headers-$(uname -r) build-essential \
+sudo -E apt-get update
+sudo -E apt-get -y upgrade
+sudo -E apt-get install -y linux-headers-$(uname -r) build-essential \
      dkms apt-transport-https \
+     linux-image-extra-$(uname -r) \
+     linux-image-extra-virtual
+
+sudo -E apt-get install -y ansible \
      wget curl jq \
      ca-certificates git \
-     linux-image-extra-$(uname -r) linux-image-extra-virtual
+     software-properties-common \
+     python-pip
 
-sudo mkdir /media/VBoxGuestAdditions
-sudo mount -o loop,ro /home/vagrant/VBoxGuestAdditions.iso /media/VBoxGuestAdditions
-sudo sh /media/VBoxGuestAdditions/VBoxLinuxAdditions.run
-sudo umount /media/VBoxGuestAdditions
-sudo rmdir /media/VBoxGuestAdditions
-rm /home/vagrant/VBoxGuestAdditions.iso
+sudo -E mkdir /media/VBoxGuestAdditions
+sudo -E mount -o loop,ro /home/vagrant/VBoxGuestAdditions.iso /media/VBoxGuestAdditions
+sudo -E sh /media/VBoxGuestAdditions/VBoxLinuxAdditions.run
+sudo -E umount /media/VBoxGuestAdditions
+sudo -E rmdir /media/VBoxGuestAdditions
+rm -f /home/vagrant/VBoxGuestAdditions.iso
 
 # @ Java @
 
@@ -27,26 +33,26 @@ rm /home/vagrant/VBoxGuestAdditions.iso
 #apt-get install -y oracle-java8-installer maven
 
 # @ Docker @
-curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
- sudo add-apt-repository \
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo -E apt-key add -
+sudo -E add-apt-repository \
    "deb [arch=amd64] https://download.docker.com/linux/ubuntu \
    $(lsb_release -cs) \
    stable"
 
-sudo apt-get update
-sudo apt-get install -y docker-ce
+sudo -E apt-get update
+sudo -E apt-get install -y docker-ce
 
 # @ Utils @
-sudo pip install ansible==2.2.1.0
+sudo -E pip install ansible==2.2.1.0
 
 # @ Filebeat @
 
-wget -qO - https://artifacts.elastic.co/GPG-KEY-elasticsearch | sudo apt-key add -
-echo "deb https://artifacts.elastic.co/packages/5.x/apt stable main" | sudo tee -a /etc/apt/sources.list.d/elastic-5.x.list
-sudo apt-get update
-sudo apt-get install filebeat
+wget -qO - https://artifacts.elastic.co/GPG-KEY-elasticsearch | sudo -E apt-key add -
+echo "deb https://artifacts.elastic.co/packages/5.x/apt stable main" | sudo -E tee -a /etc/apt/sources.list.d/elastic-5.x.list
+sudo -E apt-get update
+sudo -E apt-get install -y filebeat
 
 # @ Clean up @
-sudo apt-get autoremove -y
-sudo apt-get clean
-sudo rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+sudo -E apt-get autoremove -y
+sudo -E apt-get clean
+sudo -E rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*

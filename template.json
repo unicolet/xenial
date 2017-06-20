@@ -64,7 +64,7 @@
   ],
   "variables": {
     "cpus": "1",
-    "memory": "512",
+    "memory": "1024",
     "hostname": "xenial",
     "headless": "false",
     "disk_size": "8192"
