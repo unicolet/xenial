@@ -34,12 +34,8 @@ sudo apt-get install -y linux-image-extra-$(uname -r) linux-image-extra-virtual
 sudo apt-get install -y docker-engine
 sudo apt-get install -y git
 
-sudo service docker start
-sudo docker run hello-world
-
 # @ Utils @
-sudo pip install awscli
-sudo pip install ansible
+sudo pip install ansible==2.2.1.0
 
 # @ Filebeat @
 
@@ -47,3 +43,8 @@ wget -qO - https://artifacts.elastic.co/GPG-KEY-elasticsearch | sudo apt-key add
 echo "deb https://artifacts.elastic.co/packages/5.x/apt stable main" | sudo tee -a /etc/apt/sources.list.d/elastic-5.x.list
 sudo apt-get update
 sudo apt-get install filebeat
+
+# @ Clean up @
+sudo apt-get autoremove -y
+sudo apt-get clean
+sudo rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
