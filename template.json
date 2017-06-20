@@ -3,10 +3,10 @@
     {
       "type": "virtualbox-iso",
       "guest_os_type": "Ubuntu_64",
-      "iso_url": "http://releases.ubuntu.com/xenial/ubuntu-16.04.1-server-amd64.iso",
-      "iso_checksum": "29a8b9009509b39d542ecb229787cdf48f05e739a932289de9e9858d7c487c80",
+      "iso_url": "http://de.releases.ubuntu.com/16.04/ubuntu-16.04.2-server-i386.iso",
+      "iso_checksum": "736f2c5700313494a2282092ca0f8b0048883ed48c5fdcf585d6e1852a3a110f",
       "iso_checksum_type": "sha256",
-      "vm_name": "packer-ubuntu-16.04-amd64",
+      "vm_name": "packer-ubuntu-16.04-i386",
       "disk_size": "{{ user `disk_size` }}",
       "headless": "{{ user `headless` }}",
       "boot_wait": "5s",
@@ -57,19 +57,8 @@
       {
         "type": "vagrant",
         "compression_level": 9,
-        "output": "ubuntu-16.04-amd64.box",
+        "output": "ubuntu-16.04-i386.box",
         "keep_input_artifact": false
-      },
-      {
-        "type": "atlas",
-        "artifact": "s12v/xenial64",
-        "artifact_type": "vagrant.box",
-        "metadata": {
-          "version": "20160904",
-          "description": "**Ubuntu 16.04.1 (Xenial Xerus)**. Baked with https://github.com/s12v/xenial\n - Ansible, Puppet, Chef\n - VBoxGuestAdditions 5.0.x\n - 80G disk\n - Predictable network interface names turned off",
-          "created_at": "{{timestamp}}",
-          "provider": "virtualbox"
-        }
       }
     ]
   ],
@@ -78,6 +67,6 @@
     "memory": "512",
     "hostname": "xenial",
     "headless": "false",
-    "disk_size": "81920"
+    "disk_size": "8192"
   }
 }
