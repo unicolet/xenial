@@ -45,11 +45,6 @@
     {
       "type": "shell",
       "scripts": "scripts/install.sh"
-    },
-    {
-      "type": "ansible-local",
-      "playbook_file": "ansible/playbook.yml",
-      "playbook_dir": "ansible"
     }
   ],
   "post-processors": [
