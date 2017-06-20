@@ -37,8 +37,7 @@
       "shutdown_command": "sudo systemctl poweroff",
       "vboxmanage": [
         ["modifyvm", "{{ .Name }}", "--memory", "{{ user `memory` }}"],
-        ["modifyvm", "{{ .Name }}", "--cpus", "{{ user `cpus` }}"],
-        ["modifyvm", "{{ .Name }}", "--nestedpaging", "off"]
+        ["modifyvm", "{{ .Name }}", "--cpus", "{{ user `cpus` }}"]
       ]
     }    
   ],
