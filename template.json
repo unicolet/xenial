@@ -57,7 +57,7 @@
       {
         "type": "vagrant",
         "compression_level": 9,
-        "output": "ubuntu-16.04-i386.box",
+        "output": "pe-ubuntu-16.04-i386.box",
         "keep_input_artifact": false
       }
     ]
