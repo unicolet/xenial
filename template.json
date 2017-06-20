@@ -3,10 +3,10 @@
     {
       "type": "virtualbox-iso",
       "guest_os_type": "Ubuntu_64",
-      "iso_url": "http://de.releases.ubuntu.com/16.04/ubuntu-16.04.2-server-i386.iso",
-      "iso_checksum": "736f2c5700313494a2282092ca0f8b0048883ed48c5fdcf585d6e1852a3a110f",
+      "iso_url": "http://releases.ubuntu.com/xenial/ubuntu-16.04.2-server-amd64.iso",
+      "iso_checksum": "737ae7041212c628de5751d15c3016058b0e833fdc32e7420209b76ca3d0a535",
       "iso_checksum_type": "sha256",
-      "vm_name": "packer-ubuntu-16.04-i386",
+      "vm_name": "packer-ubuntu-16.04-amd64",
       "disk_size": "{{ user `disk_size` }}",
       "headless": "{{ user `headless` }}",
       "boot_wait": "5s",
@@ -57,7 +57,7 @@
       {
         "type": "vagrant",
         "compression_level": 9,
-        "output": "pe-ubuntu-16.04-i386.box",
+        "output": "pe-ubuntu-16.04-amd64.box",
         "keep_input_artifact": false
       }
     ]

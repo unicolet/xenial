@@ -8,7 +8,8 @@ sudo apt-get -y upgrade
 sudo apt install -y ansible linux-headers-$(uname -r) build-essential \
      dkms apt-transport-https \
      wget curl jq \
-     ca-certificates
+     ca-certificates git \
+     linux-image-extra-$(uname -r) linux-image-extra-virtual
 
 sudo mkdir /media/VBoxGuestAdditions
 sudo mount -o loop,ro /home/vagrant/VBoxGuestAdditions.iso /media/VBoxGuestAdditions
@@ -20,19 +21,20 @@ rm /home/vagrant/VBoxGuestAdditions.iso
 # @ Java @
 
 #add-apt-repository -y ppa:webupd8team/java
-#echo "oracle-java8-installer shared/accepted-oracle-license-v1-1 select true" | debconf-set-selections
+#echo "oracle-java8-installer shared/accepted-oracle-license-v1-1 select true" |    debconf-set-selections
 #echo "oracle-java8-installer shared/accepted-oracle-license-v1-1 seen true" | debconf-set-selections
 #apt-get update
 #apt-get install -y oracle-java8-installer maven
 
 # @ Docker @
-sudo apt-key adv --keyserver hkp://p80.pool.sks-keyservers.net:80 --recv-keys 58118E89F3A912897C070ADBF76221572C52609D
-echo "deb https://apt.dockerproject.org/repo ubuntu-xenial main" | tee /etc/apt/sources.list.d/docker.list
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+ sudo add-apt-repository \
+   "deb [arch=amd64] https://download.docker.com/linux/ubuntu \
+   $(lsb_release -cs) \
+   stable"
 
 sudo apt-get update
-sudo apt-get install -y linux-image-extra-$(uname -r) linux-image-extra-virtual
-sudo apt-get install -y docker-engine
-sudo apt-get install -y git
+sudo apt-get install -y docker-ce
 
 # @ Utils @
 sudo pip install ansible==2.2.1.0
