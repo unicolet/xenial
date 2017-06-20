@@ -37,7 +37,8 @@
       "shutdown_command": "sudo systemctl poweroff",
       "vboxmanage": [
         ["modifyvm", "{{ .Name }}", "--memory", "{{ user `memory` }}"],
-        ["modifyvm", "{{ .Name }}", "--cpus", "{{ user `cpus` }}"]
+        ["modifyvm", "{{ .Name }}", "--cpus", "{{ user `cpus` }}"],
+        ["modifyvm", "{{ .Name }}", "--nestedpaging", "off"]
       ]
     }    
   ],
@@ -61,7 +62,7 @@
     "cpus": "1",
     "memory": "1024",
     "hostname": "xenial",
-    "headless": "false",
+    "headless": "true",
     "disk_size": "8192"
   }
 }
