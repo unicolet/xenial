@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-set -x
+set -ex
 
 # @ VirtualBox and base packages @
 export DEBIAN_FRONTEND=noninteractive
